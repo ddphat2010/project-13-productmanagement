@@ -1,9 +1,8 @@
 const homeRouter = require("./home.route");
+const productsRouter = require("./products.route");
 
 module.exports.routesClient = (app) => {
-    app.get("/", homeRouter);
-    
-    app.get("/products", (req, res)=>{
-        res.send("<h1>Trang sản phẩm</h1>");
-    })
+    app.use("/", homeRouter);
+
+    app.use("/products", productsRouter);
 }
