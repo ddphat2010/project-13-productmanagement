@@ -1,4 +1,19 @@
 extends ../../layouts/default.pug
 
 block main
-    h2 Trang Danh Sách Sản Phẩm
+        .container.my-3
+            .row
+                .col-12
+                    .box-head
+                        h2.inner-title #{pageTitle}
+
+            .row
+                .col-4.mb-3
+                    .product-item
+                        .inner-image
+                            img(src="https://cdn.dribbble.com/users/498043/screenshots/3267962/media/6e36be5ca9276c2a1df6ca65ab363296.png?resize=800x600&vertical=center", alt="iPhone 9")
+                        .inner-content
+                            h3.inner-title iPhone 9
+                            .inner-price-new 80$
+                            .inner-price-old 100$
+                            .inner-discount -20%
