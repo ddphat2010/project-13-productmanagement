@@ -1,11 +1,14 @@
 const express = require ("express");
 const routesClient = require("./routes/client/index.route");
 const mongoose = require("mongoose");
+const dotenv = require("dotenv");
+
+dotenv.config()
 
 const app = express();
-const port = 3000;
+const port = process.env.PORT;
 
-mongoose.connect("mongodb+srv://mnrealest161:qRXdr8uNSZBSrRuh@project-be.1obtg7e.mongodb.net/project-group13-product-management")
+mongoose.connect(process.env.MONGO_URL)
     .then(() => console.log("Connected!!!"));
 
 app.set("views", "./views");
