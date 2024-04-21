@@ -1,5 +1,8 @@
+const routesDashboard = require("./dashboard.route");
+const routesProducts = require("./products.route");
+
 module.exports.routesAdmin = (app) => {
-    app.get("/dashboard", (req, res) => {
-        res.send("OK");
-    })
+    app.use("/admin/dashboard", routesDashboard);
+
+    app.use("/admin/products", routesProducts);
 }
