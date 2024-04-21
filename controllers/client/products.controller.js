@@ -12,9 +12,6 @@ module.exports.index = async (req, res) => {
         item.priceNew = item.priceNew.toFixed(0);
     }
 
-    console.log(products);
-
-  
 
     res.render("./client/pages/products/index.pug", {
         pageTitle: "Trang Danh Sách Sản Phẩm",
