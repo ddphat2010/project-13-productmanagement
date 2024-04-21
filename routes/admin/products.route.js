@@ -1,8 +1,7 @@
 const express = require("express");
 const router = express.Router();
+const controllers = require("../../controllers/admin/products.controller");
 
-router.get("/", (req, res) => {
-    res.send("Trang quản lí sản phẩm");
-})
+router.get("/", controllers.index);
 
 module.exports = router
