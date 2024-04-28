@@ -46,3 +46,31 @@
     border-bottom: 1px solid #515151;
   }
   /* End Sider */
+
+  /* Product */
+  th{
+    text-align: center;
+  }
+
+  .product-img {
+    display: block;
+    margin: 0 auto;
+  }
+  
+  .btn {
+    margin-top: 5px;
+  }
+  
+  .btn:hover {
+    opacity: 0.8;
+  }
+  
+  .text-center {
+    text-align: center;
+  }
+
+  .table td, .table th{
+    border-top: 1px solid #dee2e6;
+    vertical-align: middle;
+  }
+  

@@ -1,7 +1,7 @@
 extends ../../layouts/default.pug
 
 block main
-  h1(class="mb-4") #{pageTitle}
+  h1.mb-4 #{pageTitle}
   table.table.table-hover.table-sm
     thead
       tr
@@ -17,19 +17,19 @@ block main
         tr 
           td #{index + 1}
           td
-            img(
+            img.product-img(
               src=item.thumbnail
               alt=item.title
               width="100px"
               height="auto"
             )
           td #{item.title}
-          td #{item.price}
+          td.text-center #{item.price}
           td
             if(item.status == "active")
-              a(href="#" class="badge badge-success") Hoạt động 
+              a.badge.badge-success(href="#") Hoạt động 
             else
-              a(href="#" class="badge badge-danger") Ngừng Hoạt động 
-          td
-            button(class="btn btn-warning btn-sm") Sửa
-            button(class="btn btn-danger btn-sm ml-1") Xóa
+              a.badge.badge-danger(href="#") Ngừng Hoạt động 
+          td.text-center
+            button.btn.btn-warning.btn-sm Edit
+            button.btn.btn-danger.btn-sm.ml-1 Delete
