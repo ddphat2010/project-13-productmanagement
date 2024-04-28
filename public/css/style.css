@@ -2,6 +2,7 @@
 .header {
     border-bottom: 1px solid #ddd;
     padding: 10px 0;
+    background-color: black;
   }
   
   .header .inner-logo img {
@@ -16,11 +17,23 @@
     display: flex;
     align-items: center;
     justify-content: flex-end;
-      flex-wrap: wrap;
+    flex-wrap: wrap;
   }
   
   .header .inner-menu > ul > li {
     margin-left: 20px;
+  }
+  .header .inner-menu > ul > li > a {
+    color: white;
+    text-decoration: none;
+    padding: 10px;
+    transition: background-color 0.3s;
+  }
+
+  .header .inner-menu > ul > li > a:hover {
+    color: white;
+    border-radius: 5px;
+    background-color: rgb(125, 115, 218);
   }
   /* End Header */
   
@@ -51,6 +64,7 @@
     border: 1px solid #ddd;
     border-radius: 8px;
     overflow: hidden;
+    position: relative;
   }
   
   .product-item .inner-image {
@@ -96,4 +110,25 @@
     padding: 3px 10px;
     border-radius: 8px;
   }
+  /* Btn buy*/
+  .buy-button {
+    background-color: #4CAF50; /* Màu nền của nút */
+    color: white; /* Màu văn bản */
+    padding: 3px 10px; /* Khoảng cách xung quanh văn bản */
+    text-align: center; /* Căn chỉnh văn bản ở giữa */
+    text-decoration: none; /* Bỏ gạch chân */
+    display: inline-block; /* Hiển thị nút dạng inline-block */
+    font-size: 16px; /* Kích thước chữ */
+    margin: 4px 2px; /* Khoảng cách giữa các nút */
+    cursor: pointer; /* Con trỏ chuột dạng pointer */
+    border-radius: 8px; /* Làm tròn góc */
+    position: absolute;
+    right: 5px;
+    bottom: 15px;
+  }
+  
+  .buy-button:hover {
+    background-color: #45a049; /* Màu nền khi di chuột qua */
+  }
+  
   /* End product-item */
