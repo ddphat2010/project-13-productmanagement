@@ -1,22 +1,23 @@
 extends ../../layouts/default.pug
 
 block main
-        .container.my-3
-            .row
-                .col-12
-                    .box-head
-                        h2.inner-title #{pageTitle}
+    .container.my-3
+        .row
+            .col-12
+                .box-head
+                    h2.inner-title #{pageTitle}
 
-            .row
-                each item in products
-                    .col-4.mb-3
-                        .product-item
-                            .inner-image
-                                img(src=item.thumbnail, alt=item.title)
-                            .inner-content
-                                h3.inner-title #{item.title}
-                                .inner-price-new #{item.priceNew}
-                                .inner-price-old #{item.price}
-                                .inner-discount -#{item.discountPercentage}
-                                button.buy-button(type='button') Mua Ngay
-
+        .row
+            each item in products
+                .col-4.mb-3
+                    .product-item
+                        .inner-image
+                            img(src=item.thumbnail, alt=item.title)
+                            .inner-discount Giảm #{item.discountPercentage}%
+                        .inner-content
+                            h3.inner-title #{item.title}
+                            .inner-price-old #{item.price.toLocaleString()}
+                                sup ₫
+                            .inner-price-new #{item.priceNew.toLocaleString()} 
+                                sup ₫
+                            button.buy-button.btn.btn-success(type='button') Mua Ngay
