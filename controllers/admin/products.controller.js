@@ -1,5 +1,5 @@
 const Product = require("../../models/products.model");
-
+const filterStatusHelper = require("../../helpers/filterStatus.helper");
 // [GET] /admin/products
 // module.exports.index = (req, res) => {
 //     res.render("./admin/pages/products/index.pug", {
@@ -7,30 +7,9 @@ const Product = require("../../models/products.model");
 //     });
 // }
 module.exports.index = async (req, res) => {
-    const filterStatus = [
-        {
-            name: "Tất cả",
-            status: "",
-            class: ""
-        },
-        {
-            name: "Hoạt động",
-            status: "active",
-            class: ""
-        },
-        {
-            name: "Dừng hoạt động",
-            status: "inactive",
-            class: ""
-        }
-    ]
-
-    if(req.query.status) {
-        const index = filterStatus.findIndex(item => item.status == req.query.status) 
-        filterStatus[index].class = "active"
-    } else {
-        filterStatus[0].class = "active"
-    }
+    // filterStatus
+    const filterStatus = filterStatusHelper(req.query);
+    // end filterStatus
 
     const find = {
         deleted: false
