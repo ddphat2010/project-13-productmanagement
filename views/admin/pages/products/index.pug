@@ -2,34 +2,50 @@ extends ../../layouts/default.pug
 
 block main
   h1.mb-4 #{pageTitle}
-  table.table.table-hover.table-sm
-    thead
-      tr
-        th STT
-        th Hình ảnh
-        th Tiêu đề
-        th Giá
-        th Trạng thái
-        th Hành động
 
-    tbody
-      each item, index in products
-        tr 
-          td #{index + 1}
-          td
-            img.product-img(
-              src=item.thumbnail
-              alt=item.title
-              width="100px"
-              height="auto"
-            )
-          td #{item.title}
-          td.text-center #{item.price}
-          td
-            if(item.status == "active")
-              a.badge.badge-success(href="#") Hoạt động 
-            else
-              a.badge.badge-danger(href="#") Ngừng Hoạt động 
-          td.text-center
-            button.btn.btn-warning.btn-sm Edit
-            button.btn.btn-danger.btn-sm.ml-1 Delete
+  .card.mb-3
+    .card-header Bộ lọc và Tìm kiếm
+    .card-body
+      .row
+        .col-6
+          button(
+            class=`btn btn-sm ml-1 btn-outline-success active`
+          ) Tất cả
+          button(
+            class=`btn btn-sm ml-1 btn-outline-success`
+          ) Hoạt động
+          button(
+            class=`btn btn-sm ml-1 btn-outline-success`
+          ) Dừng hoạt động
+
+    table.table.table-hover.table-sm
+      thead
+        tr
+          th STT
+          th Hình ảnh
+          th Tiêu đề
+          th Giá
+          th Trạng thái
+          th Hành động
+
+      tbody
+        each item, index in products
+          tr 
+            td #{index + 1}
+            td
+              img.product-img(
+                src=item.thumbnail
+                alt=item.title
+                width="100px"
+                height="auto"
+              )
+            td #{item.title}
+            td.text-center #{item.price}
+            td
+              if(item.status == "active")
+                a.badge.badge-success(href="#") Hoạt động 
+              else
+                a.badge.badge-danger(href="#") Ngừng Hoạt động 
+            td.text-center
+              button.btn.btn-warning.btn-sm Edit
+              button.btn.btn-danger.btn-sm.ml-1 Delete
