@@ -8,15 +8,8 @@ const Product = require("../../models/products.model");
 // }
 module.exports.index = async (req, res) => {
     const products = await Product.find({
-        deleted: false,
-        status: "active"
+        deleted: false
     })
-
-    for (const item of products) {
-        item.priceNew = item.price * (1 - item.discountPercentage/100);
-        item.priceNew = item.priceNew.toFixed(0);
-    }
-
 
     res.render("./admin/pages/products/index.pug", {
         pageTitle: "Trang Danh Sách Sản Phẩm",
