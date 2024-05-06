@@ -8,15 +8,11 @@ block main
     .card-body
       .row
         .col-6
-          button(
-            class=`btn btn-sm ml-1 btn-outline-success active`
-          ) Tất cả
-          button(
-            class=`btn btn-sm ml-1 btn-outline-success`
-          ) Hoạt động
-          button(
-            class=`btn btn-sm ml-1 btn-outline-success`
-          ) Dừng hoạt động
+          each item in filterStatus
+            button(
+              class=`btn btn-sm ml-1 btn-outline-success ${item.class}`
+              button-status=item.status
+            ) #{item.name}
 
     table.table.table-hover.table-sm
       thead
