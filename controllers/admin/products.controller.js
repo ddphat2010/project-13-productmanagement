@@ -32,9 +32,6 @@ module.exports.index = async (req, res) => {
         filterStatus[0].class = "active"
     }
 
-    console.log(filterStatus);
-
-
     const find = {
         deleted: false
     }
@@ -44,12 +41,19 @@ module.exports.index = async (req, res) => {
         find.status = req.query.status;
     }
 
+    if(req.query.keyword) {
+        const keyword = RegExp(req.query.keyword, "i")
+        find.title = keyword;
+    }
+
+
     const products = await Product.find(find);
 
 
     res.render("./admin/pages/products/index.pug", {
         pageTitle: "Trang Danh Sách Sản Phẩm",
         products: products,
-        filterStatus: filterStatus
+        filterStatus: filterStatus,
+        keyword: req.query.keyword
     });
 }
