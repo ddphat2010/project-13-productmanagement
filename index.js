@@ -3,11 +3,14 @@ const routesClient = require("./routes/client/index.route");
 const routesAdmin = require("./routes/admin/index.admin");
 const mongoose = require("mongoose");
 const dotenv = require("dotenv");
+const methodOverride = require("method-override")
 
 dotenv.config()
 
 const app = express();
 const port = process.env.PORT;
+
+app.use(methodOverride("_method"));
 
 mongoose.connect(process.env.MONGO_URL)
     .then(() => console.log("Connected!!!"));

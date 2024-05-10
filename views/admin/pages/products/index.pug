@@ -41,12 +41,31 @@ block main
             td.text-center #{item.price}
             td
               if(item.status == "active")
-                a.badge.badge-success(href="#") Hoạt động 
+                a(
+                  href="javascript:;" 
+                  class="badge badge-success"
+                  data-id=item.id
+                  data-status=item.status
+                  button-change-status
+                ) Hoạt động 
               else
-                a.badge.badge-danger(href="#") Ngừng Hoạt động 
+                a(
+                  href="javascript:;" 
+                  class="badge badge-danger"
+                  data-id=item.id
+                  data-status=item.status
+                  button-change-status
+                ) Dừng hoạt động 
             td.text-center
               button.btn.btn-warning.btn-sm Edit
               button.btn.btn-danger.btn-sm.ml-1 Delete
   
   nav
     +pagination(pagination)
+
+  form(
+    form-change-status
+    action=""
+    method="POST"
+    data-path=`/admin/products/change-status`
+  )
