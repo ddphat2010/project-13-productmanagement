@@ -4,11 +4,15 @@ const routesAdmin = require("./routes/admin/index.admin");
 const mongoose = require("mongoose");
 const dotenv = require("dotenv");
 const methodOverride = require("method-override")
+const bodyParser = require("body-parser");
 
 dotenv.config()
 
 const app = express();
 const port = process.env.PORT;
+
+// parser application/x-www-form-urlencode
+app.use(bodyParser.urlencoded({extended: false}));
 
 app.use(methodOverride("_method"));
 
