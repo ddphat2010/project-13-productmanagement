@@ -80,7 +80,15 @@ module.exports.changeMulti = async (req, res) => {
             }, {
                 status: type
             })
-            break;   
+            break; 
+        case "delete-all":
+            await Product.updateMany({
+                _id: {$in: ids}
+            }, {
+                deleted: true,
+                deletedAt: new Date()
+            })
+            break;  
         default:
             break;
     }

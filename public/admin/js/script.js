@@ -126,6 +126,15 @@ const formChangeMulti = document.querySelector("[form-change-multi]");
 if(formChangeMulti) {
     formChangeMulti.addEventListener("submit", (event) => {
         event.preventDefault();
+
+        const type = event.target.elements.type.value;
+        
+        if(type == "delete-all") {
+            const isComfirm = confirm("Bạn có chắc muốn xóa nhũng sản phẩm này?");
+            if(!isComfirm) {
+                return;
+            }
+        }
         
         const inputChecked = document.querySelectorAll("input[name='id']:checked");
         if(inputChecked.length > 0) {
