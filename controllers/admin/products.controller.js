@@ -1,6 +1,7 @@
 const Product = require("../../models/products.model");
 const filterStatusHelper = require("../../helpers/filterStatus.helper");
 const paginationHelper = require("../../helpers/pagination.helper");
+
 // [GET] /admin/products
 // module.exports.index = (req, res) => {
 //     res.render("./admin/pages/products/index.pug", {
