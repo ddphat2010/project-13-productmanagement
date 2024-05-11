@@ -7,7 +7,8 @@ const methodOverride = require("method-override")
 const bodyParser = require("body-parser");
 var flash = require('express-flash');
 var cookieParser = require('cookie-parser');
-var session = require('express-session')
+var session = require('express-session');
+
 
 
 dotenv.config()
