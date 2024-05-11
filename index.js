@@ -5,11 +5,21 @@ const mongoose = require("mongoose");
 const dotenv = require("dotenv");
 const methodOverride = require("method-override")
 const bodyParser = require("body-parser");
+var flash = require('express-flash');
+var cookieParser = require('cookie-parser');
+var session = require('express-session')
+
 
 dotenv.config()
 
 const app = express();
 const port = process.env.PORT;
+
+// flash
+app.use(cookieParser('MINHNHAT'));
+app.use(session({ cookie: { maxAge: 60000 }}));
+app.use(flash());
+// End flash
 
 // parser application/x-www-form-urlencode
 app.use(bodyParser.urlencoded({extended: false}));

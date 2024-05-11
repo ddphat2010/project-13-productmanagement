@@ -66,6 +66,7 @@ if(buttonPagination.length > 0) {
 
 // Change-status
 const buttonChangeStatus = document.querySelectorAll("[button-change-status]");
+
 if(buttonChangeStatus.length > 0) {
     buttonChangeStatus.forEach(button => {
         const formChangeStatus = document.querySelector("[form-change-status]");
@@ -190,3 +191,22 @@ if(buttonDelete.length > 0) {
     })
 }
 // End button-delete Item
+
+// Show alert
+const showAlert = document.querySelector("[show-alert]");
+
+if(showAlert) {
+    const time = parseInt(showAlert.getAttribute("data-time"));
+    setTimeout(() => {
+       showAlert.classList.add("alert-hidden");
+    }, time)
+
+    const closeAlert = showAlert.querySelector("[close-alert]");
+
+    closeAlert.addEventListener("click", () => {
+        showAlert.classList.add("alert-hidden");
+    })
+}
+
+
+// End Show alert

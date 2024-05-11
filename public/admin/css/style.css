@@ -73,4 +73,40 @@
     border-top: 1px solid #dee2e6;
     vertical-align: middle;
   }
+
+  /* Show alert */
+  [show-alert] {
+    position: fixed;
+    top: 70px;
+    right: 15px;
+    z-index: 999;
+  }
+
+  [show-alert].alert-hidden {
+    animation-name: alert-hidden;
+    animation-duration: 0.4s;
+    animation-fill-mode: both;
+  }
+
+  @keyframes alert-hidden {
+    form {
+      right: 15px;
+    } to {
+      right: -100%;
+      display: none;
+    }
+  }
+
+  [show-alert] [close-alert] {
+    background: #ffffffc4;
+    display: inline-block;
+    width: 24px;
+    height: 24px;
+    line-height: 24px;
+    text-align: center;
+    font-weight: 600;
+    border-radius: 50%;
+    cursor: pointer;
+  }
+  /* End Show alert */
   
