@@ -72,8 +72,12 @@ block main
                   button-change-status
                 ) Dừng hoạt động 
             td.text-center
-              button.btn.btn-warning.btn-sm Edit
-              button.btn.btn-danger.btn-sm.ml-1 Delete
+              button(class="btn btn-warning btn-sm") Chỉnh sửa
+              button(
+                class="btn btn-danger btn-sm ml-1" 
+                button-delete
+                data-id=item.id
+              ) Xóa
   
   nav
     +pagination(pagination)
@@ -83,4 +87,11 @@ block main
     action=""
     method="POST"
     data-path=`/admin/products/change-status`
+  )
+
+  form(
+    form-delete-item
+    action=""
+    method="POST"
+    data-path=`/admin/products/delete`
   )

@@ -72,8 +72,6 @@ module.exports.changeMulti = async (req, res) => {
     const type = req.body.type
     const ids = req.body.ids.split(", ")
 
-    console.log(ids);
-
     switch (type) {
         case "active":
         case "inactive":
@@ -86,6 +84,18 @@ module.exports.changeMulti = async (req, res) => {
         default:
             break;
     }
+
+    res.redirect("back");
+}
+
+// [DELETE] /admin/products/delete/:id
+module.exports.deleteItem = async (req, res) => {
+    const id = req.params.id
+
+    await Product.deleteOne({
+        _id: id
+    })
+
 
     res.redirect("back");
 }
