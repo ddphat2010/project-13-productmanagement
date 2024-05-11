@@ -12,6 +12,8 @@ router.delete("/delete/:id", controllers.deleteItem);
 
 router.get("/create/", controllers.create);
 
+router.post("/create/", controllers.createPost);
+
 
 
 module.exports = router;
