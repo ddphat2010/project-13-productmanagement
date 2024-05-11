@@ -10,4 +10,8 @@ router.patch("/change-multi", controllers.changeMulti);
 
 router.delete("/delete/:id", controllers.deleteItem);
 
+router.get("/create/", controllers.create);
+
+
+
 module.exports = router;
