@@ -143,9 +143,18 @@ if(formChangeMulti) {
 
             inputChecked.forEach(input => {
                 const id = input.value;
+                if(type == "change-position") {
+                    const position = input.closest("tr").querySelector("input[name='position']").value
+                    
+                    console.log(position);
 
-                ids.push(id);
+                    ids.push(`${id}-${position}`);
+                } else {
+                    ids.push(id);
+                }
             })
+
+            console.log(ids);
 
             inputIds.value = ids.join(", ")
 
