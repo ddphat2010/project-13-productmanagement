@@ -91,7 +91,11 @@ block main
                   button-change-status
                 ) Dừng hoạt động 
             td.text-center
-              button(class="btn btn-warning btn-sm") Chỉnh sửa
+              a(
+                href=`/admin/products/edit/${item.id}`
+                class="btn btn-warning btn-sm"
+
+              ) Chỉnh sửa
               button(
                 class="btn btn-danger btn-sm ml-1" 
                 button-delete
