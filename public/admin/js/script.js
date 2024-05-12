@@ -207,6 +207,20 @@ if(showAlert) {
         showAlert.classList.add("alert-hidden");
     })
 }
-
-
 // End Show alert
+
+// Preview Image
+const uploadImage = document.querySelector("[upload-image]");
+
+if(uploadImage) {
+    const uploadImageInput = uploadImage.querySelector("[upload-image-input]");
+    const uploadImagePreview = uploadImage.querySelector("[upload-image-preview]");
+
+    uploadImageInput.addEventListener("change", (event) => {
+        const [file] = uploadImageInput.files;
+        if(file) {
+            uploadImagePreview.src = URL.createObjectURL(file)
+        }
+    })
+}
+// End Preview Image

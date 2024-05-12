@@ -109,4 +109,20 @@
     cursor: pointer;
   }
   /* End Show alert */
+
+  /* Image Preview */
+  .image-preview {
+    width: 160px;
+    height: auto;
+    margin-top: 15px;
+    border: 1px solid;
+    padding: 15px;
+    border-radius: 5px;
+  }
+
+  .image-preview[src=""] {
+    display: none;
+  }
+  /* End Image Preview */
+
   
