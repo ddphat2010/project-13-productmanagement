@@ -223,6 +223,27 @@ module.exports.editPatch = async (req, res) => {
     } catch (error) {
         res.redirect("/admin/products");
     }
-    
 
+}
+
+//  [GET] /admin/products/detail/:id
+module.exports.detail = async (req, res) => {
+    try {
+        const id = req.params.id
+    
+        const product = await Product.findOne({
+            _id: id,
+            deleted: false
+        });
+    
+        console.log(product);
+    
+    
+        res.render("./admin/pages/products/detail.pug", {
+            pageTitle: "Chi tiết sản phẩm",
+            product: product
+        });
+    } catch (error) {
+        res.redirect("/admin/products");
+    }
 }
