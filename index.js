@@ -30,10 +30,12 @@ app.use(methodOverride("_method"));
 mongoose.connect(process.env.MONGO_URL)
     .then(() => console.log("Connected!!!"));
 
-app.set("views", "./views");
+app.set("views", `${__dirname}/views`);
+// app.set("views", "./views");
 app.set("view engine", "pug");
 
-app.use(express.static("public"))
+app.use(express.static(`${__dirname}/public`));
+// app.use(express.static("public"))
 
 // routesClient
 routesClient.routesClient(app);
