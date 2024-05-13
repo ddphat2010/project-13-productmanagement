@@ -8,7 +8,7 @@ const bodyParser = require("body-parser");
 var flash = require('express-flash');
 var cookieParser = require('cookie-parser');
 var session = require('express-session');
-
+const path = require("path");
 
 
 dotenv.config()
@@ -36,6 +36,10 @@ app.set("view engine", "pug");
 
 app.use(express.static(`${__dirname}/public`));
 // app.use(express.static("public"))
+
+// New Route to the TinyMCE Node module
+app.use('/tinymce', express.static(path.join(__dirname, 'node_modules', 'tinymce')));
+
 
 // routesClient
 routesClient.routesClient(app);
