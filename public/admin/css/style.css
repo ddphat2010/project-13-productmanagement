@@ -124,5 +124,57 @@
     display: none;
   }
   /* End Image Preview */
+/* Định dạng chung cho container sản phẩm */
+.product-container {
+  display: flex;
+  align-items: flex-start;
+  background: #fff;
+  padding: 1rem;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
 
-  
+/* Định dạng cho hình ảnh sản phẩm */
+.product-image {
+  flex: 0 0 300px; /* chiều rộng cố định cho hình ảnh */
+  margin-right: 2rem;
+}
+
+.product-image img {
+  width: 100%;
+  height: auto;
+}
+
+/* Định dạng cho nội dung bên phải hình ảnh */
+.product-info {
+  flex: 1; /* chiếm đủ không gian còn lại */
+}
+.product-price {
+  color: #008000;
+  font-size: 1.5rem;
+  margin-bottom: 1rem;
+}
+.product-discount {
+  color: #FF4500;
+  margin-bottom: 1rem;
+}
+
+/* Tiêu đề sản phẩm và thông tin khác */
+.product-title, .product-price, .product-discount, .product-status, .product-position, .product-description {
+  margin-bottom: 1rem;
+}
+
+/* Định dạng cho badge trạng thái */
+.badge {
+  padding: 0.25em 0.6em;
+  border-radius: 0.25rem;
+  color: white;
+  font-size: 1rem;
+}
+
+.badge-success {
+  background-color: #28a745;
+}
+
+.badge-danger {
+  background-color: #dc3545;
+}
