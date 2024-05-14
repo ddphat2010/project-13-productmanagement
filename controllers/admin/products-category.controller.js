@@ -2,8 +2,13 @@ const ProductCategory = require("../../models/products-category.model");
 
 // [GET] /admin/products-category
 module.exports.index = async (req, res) => {
+    const records = await ProductCategory.find({
+        deleted: false
+    });
+
     res.render("./admin/pages/products-category/index.pug", {
-        pageTitle: "Danh mục Sản Phẩm"
+        pageTitle: "Danh mục Sản Phẩm",
+        records: records
     });
 }
 
