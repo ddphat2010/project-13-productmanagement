@@ -1,4 +1,5 @@
 const ProductCategory = require("../../models/products-category.model");
+const createTreeHelper = require("../../helpers/createTree.healper");
 
 // [GET] /admin/products-category
 module.exports.index = async (req, res) => {
@@ -14,8 +15,50 @@ module.exports.index = async (req, res) => {
 
 // [GET] /admin/products-category/create
 module.exports.create = async (req, res) => {
+    const records = await ProductCategory.find({
+        deleted: false
+    })
+
+
+    const newRecords = createTreeHelper(records);
+
+    // console.log(records);
+    console.log(newRecords);
+
+    // [
+    //     {
+    //         title : "Điện Thoại",
+    //         children : [
+    //             {
+    //                 title: 'Điện Thoại Samsung'
+    //             },{
+    //                 title: 'Điện Thoại Iphone'
+    //             }
+    //         ]
+    //     },{
+    //         title : 'Thời Trang',
+    //         children : [
+    //             {
+    //                 title: 'Thời Trang nam',
+    //                 children: [
+    //                     {
+    //                         title: 'Áo khoác nam'
+    //                     },{
+    //                         title: 'Quần dài nam'
+    //                     }
+    //                 ]
+    //             },{
+    //                 title: 'Thời Trang nữ'
+    //             },{
+    //                 title: 'Thời Trang trẻ em'
+    //             }
+    //         ]
+    //     }
+    // ]
+
     res.render("./admin/pages/products-category/create.pug", {
-        pageTitle: "Thêm mới Sản Phẩm"
+        pageTitle: "Thêm mới Sản Phẩm",
+        records: newRecords
     });
 }
 

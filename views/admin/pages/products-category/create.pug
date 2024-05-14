@@ -1,7 +1,9 @@
 extends ../../layouts/default.pug
 include ../../mixins/alert.pug
+include ../../mixins/select-tree.pug
 
 block main
+  +alert-success(5000)
 
   form(
     action=`/admin/products-category/create`
@@ -19,12 +21,14 @@ block main
       )
     div(class="form-group")
       label(for="parent_id") Danh mục cha
-      input(
-        type="text"
+      select(
         class="form-control"
         id="parent_id"
         name="parent_id"
       )
+        option(value="") -- Chọn danh mục Cha --
+        if(records)
+          +select-tree(records)
     div(class="form-group")
       label(for="desc") Mô tả
       textarea(
