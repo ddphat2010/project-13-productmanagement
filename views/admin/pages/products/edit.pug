@@ -5,7 +5,7 @@ block main
     +alert-error(5000)
     +alert-success(5000)
 
-    h1(class="mb-4") Chỉnh sửa sản phẩm
+    h1(class="mb-4 pagination justify-content-center") Chỉnh sửa sản phẩm
 
     form(
         action=`/admin/products/edit/${product.id}?_method=PATCH`
@@ -13,7 +13,7 @@ block main
         enctype="multipart/form-data"
     )
         div(class="form-group")
-            label(for="title") Tiêu đề
+            label(for="title") <b>Tiêu đề</b>
             input(
                 type="text"
                 class="form-control"
@@ -23,7 +23,7 @@ block main
                 value=product.title
             )
         div(class="form-group")
-            label(for="desc") Mô tả
+            label(for="desc") <b>Mô tả</b>
             textarea(
                 class="form-control"
                 id="desc"
@@ -31,7 +31,7 @@ block main
                 rows="5"
             ) #{product.description}
         div(class="form-group")
-            label(for="price") Giá
+            label(for="price") <b>Giá</b>
             input(
                 type="number"
                 class="form-control"
@@ -40,8 +40,7 @@ block main
                 min="0"
                 value=product.price
             )
-        div(class="form-group")
-            label(for="discount") % Giảm giá
+        div(class="form-group") <b> % Giảm giá</b>
             input(
                 type="number"
                 class="form-control"
@@ -51,7 +50,7 @@ block main
                 value=product.discountPercentage
             )
         div(class="form-group")
-            label(for="stock") Số lượng
+            label(for="stock") <b>Số lượng</b>
             input(
                 type="number"
                 class="form-control"
@@ -61,7 +60,7 @@ block main
                 value=product.stock
             )
         div(class="form-group" upload-image)
-            label(for="thumbnail") Ảnh
+            label(for="thumbnail") <b>Ảnh</b>
             input(
                 type="file"
                 class="form-control-file"
@@ -76,7 +75,7 @@ block main
                 upload-image-preview
             )
         div(class="form-group")
-            label(for="position") Vị trí
+            label(for="position") <b>Vị trí</b>
             input(
                 type="number"
                 class="form-control"
@@ -95,7 +94,7 @@ block main
             value="active"
             checked=(product.status == "active" ? true : false)
             )
-            label(for="statusActive" class="form-check-label") Hoạt động
+            label(for="statusActive" class="form-check-label") <b>Hoạt động</b>
         div(class="form-group form-check form-check-inline")
             input(
             type="radio"
@@ -105,7 +104,7 @@ block main
             value="inactive"
             checked=(product.status == "inactive" ? true : false)
             )
-            label(for="statusInActive" class="form-check-label") Dừng hoạt động
+            label(for="statusInActive" class="form-check-label") <b>Dừng hoạt động</b>
         div(class="form-group")
             button(
             type="submit"

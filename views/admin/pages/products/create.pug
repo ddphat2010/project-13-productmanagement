@@ -4,7 +4,7 @@ include ../../mixins/alert.pug
 block main
     +alert-error(5000)
 
-    h1(class="mb-4") Thêm mới sản phẩm
+    h1(class="mb-4 pagination justify-content-center") Thêm mới sản phẩm
 
     form(
         action=`/admin/products/create`
@@ -13,7 +13,7 @@ block main
         enctype="multipart/form-data"
     )
         div(class="form-group")
-            label(for="title") Tiêu đề
+            label(for="title") <b>Tiêu đề</b>
             input(
                 type="text"
                 class="form-control"
@@ -22,7 +22,7 @@ block main
                 required
             )
         div(class="form-group")
-            label(for="desc") Mô tả
+            label(for="desc") <b>Mô tả</b>
             textarea(
                 class="form-control"
                 id="desc"
@@ -30,7 +30,7 @@ block main
                 rows="5"
             )
         div(class="form-group")
-            label(for="price") Giá
+            label(for="price") <b>Giá</b>
             input(
                 type="number"
                 class="form-control"
@@ -40,7 +40,7 @@ block main
                 min="0"
             )
         div(class="form-group")
-            label(for="discount") % Giảm giá
+            label(for="discount") <b> % Giảm giá</b>
             input(
                 type="number"
                 class="form-control"
@@ -50,7 +50,7 @@ block main
                 min="0"
             )
         div(class="form-group")
-            label(for="stock") Số lượng
+            label(for="stock") <b>Số lượng</b>
             input(
                 type="number"
                 class="form-control"
@@ -60,7 +60,7 @@ block main
                 min="0"
             )
         div(class="form-group" upload-image)
-            label(for="thumbnail") Ảnh
+            label(for="thumbnail") <b>Ảnh</b>
             input(
                 type="file"
                 class="form-control-file"
@@ -75,7 +75,7 @@ block main
                 upload-image-preview
             )
         div(class="form-group")
-            label(for="position") Vị trí
+            label(for="position") <b>Vị trí</b>
             input(
                 type="number"
                 class="form-control"
@@ -93,7 +93,7 @@ block main
             value="active"
             checked
             )
-            label(for="statusActive" class="form-check-label") Hoạt động
+            label(for="statusActive" class="form-check-label") <b>Hoạt động</b>
         div(class="form-group form-check form-check-inline")
             input(
             type="radio"
@@ -102,7 +102,7 @@ block main
             name="status"
             value="inactive"
             )
-            label(for="statusInActive" class="form-check-label") Dừng hoạt động
+            label(for="statusInActive" class="form-check-label") <b>Dừng hoạt động</b>
         div(class="form-group")
             button(
             type="submit"
