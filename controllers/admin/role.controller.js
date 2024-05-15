@@ -12,18 +12,52 @@ module.exports.index = async (req, res) => {
     });
 }
 
-// [GET]/admin/roles/create
+// [GET] /admin/roles/create
 module.exports.create = (req, res) => {
     res.render("./admin/pages/roles/create.pug", {
         pageTitle: "Thêm mới nhóm quyền"
     });
 }
 
-// [Post]/admin/roles/create
+// [Post] /admin/roles/create
 module.exports.createPost = async (req, res) => {
     const record = new Role(req.body);
 
     await record.save()
     
     res.redirect("/admin/roles");
+}
+
+// [GET] /admin/roles/edit/:id
+module.exports.edit = async (req, res) => {
+    try {
+        const records = await Role.findOne({
+            _id: req.params.id,
+            deleted: false
+        })
+    
+        res.render("./admin/pages/roles/edit.pug", {
+            pageTitle: "Chỉnh sửa nhóm quyền",
+            records: records
+        });
+    } catch (error) {
+        console.log(error);
+        res.redirect("/admin/roles");
+    }
+}
+
+// [PATCH] /admin/roles/edit/:id
+module.exports.editPatch = async (req, res) => {
+    try {
+        await Role.updateOne({
+            _id: req.params.id,
+            deleted: false
+        },
+            req.body
+        )
+        res.redirect("back");
+    } catch (error) {
+        console.log(error);
+    }
+
 }

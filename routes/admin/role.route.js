@@ -8,4 +8,9 @@ router.get("/create", controllers.create);
 
 router.post("/create", controllers.createPost);
 
+router.get("/edit/:id", controllers.edit);
+
+router.patch("/edit/:id", controllers.editPatch);
+
+
 module.exports = router
