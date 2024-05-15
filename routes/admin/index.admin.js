@@ -1,6 +1,7 @@
 const routesDashboard = require("./dashboard.route");
 const routesProducts = require("./products.route");
 const routesProductsCategory = require("./product-category.route");
+const routesRoles = require("./role.route");
 
 module.exports.routesAdmin = (app) => {
     app.use("/admin/dashboard", routesDashboard);
@@ -8,4 +9,6 @@ module.exports.routesAdmin = (app) => {
     app.use("/admin/products", routesProducts);
 
     app.use("/admin/products-category", routesProductsCategory);
+
+    app.use("/admin/roles", routesRoles);
 }
