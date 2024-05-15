@@ -61,3 +61,15 @@ module.exports.editPatch = async (req, res) => {
     }
 
 }
+
+// [GET] /permission
+module.exports.permission = async (req, res) => {
+    const records = await Role.find({
+        deleted: false
+    })
+
+    res.render("./admin/pages/roles/permission.pug", {
+        pageTitle: "Phân quyền",
+        records: records
+    });
+}
