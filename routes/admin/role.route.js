@@ -12,7 +12,9 @@ router.get("/edit/:id", controllers.edit);
 
 router.patch("/edit/:id", controllers.editPatch);
 
-router.get("/permission", controllers.permission);
+router.get("/permissions", controllers.permissions);
+
+router.patch("/permissions", controllers.permissionsPatch);
 
 
 module.exports = router

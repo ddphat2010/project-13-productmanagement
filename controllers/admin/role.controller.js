@@ -1,3 +1,4 @@
+const { json } = require("body-parser");
 const Role = require("../../models/role.model");
 
 // [GET] /admin/roles
@@ -63,13 +64,37 @@ module.exports.editPatch = async (req, res) => {
 }
 
 // [GET] /permission
-module.exports.permission = async (req, res) => {
+module.exports.permissions = async (req, res) => {
     const records = await Role.find({
         deleted: false
     })
 
-    res.render("./admin/pages/roles/permission.pug", {
+    console.log(records);
+
+    res.render("./admin/pages/roles/permissions.pug", {
         pageTitle: "Phân quyền",
         records: records
     });
+}
+
+// [PATCH] /permission
+module.exports.permissionsPatch = async (req, res) => {
+    const roles = JSON.parse(req.body.roles);
+    console.log(roles)
+
+    try {
+        for (const item of roles) {
+            await Role.updateOne({
+                _id: item.id
+            },{
+                permissions: item.permissions
+            })
+        }
+        req.flash("success", "Cập nhật phân quyền thành công!!!");
+    } catch (error) {
+        console.log(error);
+        req.flash("success", "Cập nhật phân quyền không thành công!!!");
+    }
+
+    res.redirect("back");
 }
