@@ -77,7 +77,7 @@ module.exports.permissions = async (req, res) => {
     });
 }
 
-// [PATCH] /permission
+// [PATCH] /permissions
 module.exports.permissionsPatch = async (req, res) => {
     const roles = JSON.parse(req.body.roles);
     console.log(roles)
