@@ -5,7 +5,6 @@ const Roles = require("../../models/role.model");
 const generateHelper = require("../../helpers/generate.Helper");
 
 
-
 // [GET] /admin/accounts
 module.exports.index = async (req, res) => {
     // find
@@ -15,6 +14,14 @@ module.exports.index = async (req, res) => {
     // End find
 
     const records = await Account.find(find);
+
+    for (const record of records) {
+        const role = await Roles.findOne({
+            _id: record.role_id
+        })
+        record.role = role
+
+    }
 
     res.render("./admin/pages/accounts/index.pug", {
         pageTitle: "Danh sách tài khoản",
