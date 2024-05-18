@@ -95,8 +95,5 @@ module.exports.editPatch = async (req, res) => {
         req.body        
     )
 
-    console.log(id)
-    console.log(req.body);
-
     res.redirect("back");
   };

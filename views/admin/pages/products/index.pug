@@ -55,10 +55,11 @@ block main
         .col-8
           +formChangeMulti(`/admin/products/change-multi?_method=PATCH`)
         .col-4.text-right
-          a(
-            href=`/admin/products/create`
-            class="btn btn-outline-success"
-          ) + Thêm mới
+          if(role.permissions.includes("products_create"))
+            a(
+              href=`/admin/products/create`
+              class="btn btn-outline-success"
+            ) + Thêm mới
       
 
     table.table.table-hover.table-sm(checkbox-multi)

@@ -64,18 +64,22 @@ module.exports.create = async (req, res) => {
 
 // [POST] /admin/products-category/create
 module.exports.createPost = async (req, res) => {
-    if(req.body.position == "") {
-        const countRecords = await ProductCategory.countDocuments();
-        req.body.position = countRecords + 1;
+    if(res.locals.role.permissions.includes("products-category_create")) {
+        if(req.body.position == "") {
+            const countRecords = await ProductCategory.countDocuments();
+            req.body.position = countRecords + 1;
+        } else {
+            req.body.position = parseInt(req.body.position);
+        }
+    
+        const records = new ProductCategory(req.body);
+        await records.save();
+    
+        req.flash("success", "Thêm mới danh mục sản phẩm thành công");
+        res.redirect("/admin/products-category");
     } else {
-        req.body.position = parseInt(req.body.position);
+        res.send("403");
     }
-
-    const records = new ProductCategory(req.body);
-    await records.save();
-
-    req.flash("success", "Thêm mới danh mục sản phẩm thành công");
-    res.redirect("/admin/products-category");
 }
 
 // [GET] /admin/products-category/edit/:id
