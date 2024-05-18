@@ -3,6 +3,7 @@ const filterStatusHelper = require("../../helpers/filterStatus.helper");
 const paginationHelper = require("../../helpers/pagination.helper");
 const createTreeHelper = require("../../helpers/createTree.healper");
 const ProductCategory = require("../../models/products-category.model");
+const Account = require("../../models/account.model");
 
 
 // [GET] /admin/products
@@ -52,6 +53,16 @@ module.exports.index = async (req, res) => {
         .sort(sort)
         .limit(objectPagination.limitItem)
         .skip(objectPagination.skip);
+
+        for (const product of products) {
+            const account = await Account.findOne({
+                _id: product.createdBy.accountId
+            })
+
+            if(account) {
+                product.createdBy.fullName = account.fullName
+            }
+        }
 
 
         res.render("./admin/pages/products/index.pug", {
@@ -178,13 +189,14 @@ module.exports.createPost = async (req, res) => {
         req.body.position = parseInt(req.body.position);
     }
 
-    console.log(req.file);
-    console.log(req.body);
+    req.body.createdBy = {
+        accountId: res.locals.user.id,
+        createdAt: new Date()
+    };
 
     // if(req.file && req.file.filename) {
     //     req.body.thumbnail = `/uploads/${req.file.filename}`
     // }
-
 
     const product = new Product(req.body);
     await product.save();

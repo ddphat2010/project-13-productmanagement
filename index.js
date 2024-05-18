@@ -9,6 +9,7 @@ var flash = require('express-flash');
 var cookieParser = require('cookie-parser');
 var session = require('express-session');
 const path = require("path");
+const moment = require("moment");
 
 
 dotenv.config()
@@ -39,6 +40,9 @@ app.use(express.static(`${__dirname}/public`));
 
 // New Route to the TinyMCE Node module
 app.use('/tinymce', express.static(path.join(__dirname, 'node_modules', 'tinymce')));
+
+// App.local.variables
+app.locals.moment = moment
 
 
 // routesClient
