@@ -8,8 +8,6 @@ module.exports.category = async (req, res, next) => {
 
     const newCategoryProducts = createTreeHelper(categoryProducts);
 
-    console.log(newCategoryProducts);
-
     res.locals.layoutCategoryProducts = newCategoryProducts;
 
     next();
