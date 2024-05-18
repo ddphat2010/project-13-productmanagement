@@ -8,6 +8,10 @@ header.header
       .col-9
         div(class="text-right")
           a(
+            href="/admin/my-account"
+            class="btn btn-secondary btn-sm mr-2"
+          ) #{user.fullName}
+          a(
             href="/admin/auth/logout"
             class="btn btn-danger btn-sm"
           ) Đăng Xuất
