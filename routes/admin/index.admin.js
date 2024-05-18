@@ -4,17 +4,38 @@ const routesProductsCategory = require("./product-category.route");
 const routesRoles = require("./role.route");
 const routesAccounts = require("./account.route");
 const routesAuth = require("./auth.route");
+const authMiddleware = require("../../middlewares/admin/auth.middleware");
 
 module.exports.routesAdmin = (app) => {
-    app.use("/admin/dashboard", routesDashboard);
+    app.use(
+        "/admin/dashboard", 
+        authMiddleware.requireAuth, 
+        routesDashboard
+    );
 
-    app.use("/admin/products", routesProducts);
+    app.use(
+        "/admin/products", 
+        authMiddleware.requireAuth, 
+        routesProducts
+    );
 
-    app.use("/admin/products-category", routesProductsCategory);
+    app.use(
+        "/admin/products-category", 
+        authMiddleware.requireAuth, 
+        routesProductsCategory
+    );
 
-    app.use("/admin/roles", routesRoles);
+    app.use(
+        "/admin/roles", 
+        authMiddleware.requireAuth, 
+        routesRoles
+    );
 
-    app.use("/admin/accounts", routesAccounts);
+    app.use(
+        "/admin/accounts", 
+        authMiddleware.requireAuth, 
+        routesAccounts
+    );
 
     app.use("/admin/auth", routesAuth);
 }
