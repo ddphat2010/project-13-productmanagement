@@ -8,18 +8,23 @@ block main
                     h2.inner-title #{pageTitle}
 
         .row
-            each item in products
-                .col-4.mb-3
-                    .product-item
-                        .inner-image
-                            a(href=`/products/${item.slug}`)
-                                img(src=item.thumbnail, alt=item.title)
-                                .inner-discount Giảm #{item.discountPercentage}%
-                        .inner-content
-                            h3.inner-title 
-                                a(href=`/products/${item.slug}`) #{item.title}
-                            .inner-price-old #{item.price.toLocaleString()}
-                                sup ₫
-                            .inner-price-new #{item.priceNew.toLocaleString()} 
-                                sup ₫
-                            button.buy-button.btn.btn-success(type='button') Mua Ngay
+            if(products.length > 0)
+                each item in products
+                    .col-4.mb-3
+                        .product-item
+                            .inner-image
+                                a(href=`/products/${item.slug}`)
+                                    img(src=item.thumbnail, alt=item.title)
+                                    .inner-discount Giảm #{item.discountPercentage}%
+                            .inner-content
+                                h3.inner-title 
+                                    a(href=`/products/${item.slug}`) #{item.title}
+                                .inner-price-old #{item.price.toLocaleString()}
+                                    sup ₫
+                                .inner-price-new #{item.priceNew.toLocaleString()} 
+                                    sup ₫
+                                button.buy-button.btn.btn-success(type='button') Mua Ngay
+            
+            else
+                div(class="col-12")
+                    div(class="alert alert-danger") KHÔNG TÌM THẤY SẢN PHẨM NÀO
