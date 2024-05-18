@@ -84,10 +84,16 @@ module.exports.changeStatus = async (req, res) => {
     const status = (req.params.status);
     const id = (req.params.id);
 
+    const objectUpdatedBy = {
+        accountId: res.locals.user.id,
+        updatedAt: new Date()
+    }
+
     await Product.updateOne({
         _id: id
     }, {
-        status: status
+        status: status,
+        $push: { updatedBy: objectUpdatedBy }
     })
 
     req.flash('success', 'Cập nhật trạng thái thành công!!!');
@@ -255,11 +261,19 @@ module.exports.editPatch = async (req, res) => {
             req.body.thumbnail = `/uploads/${req.file.filename}`
         }
 
+        const objectUpdatedBy = {
+            accountId: res.locals.user.id,
+            updatedAt: new Date()
+        }
+
         await Product.updateOne({
             _id: id,
             deleted: false
             }, 
-            req.body
+            {
+                ...req.body,
+                $push: { updatedBy: objectUpdatedBy }
+            }
         );
 
         req.flash("success", "Cập nhật sản phẩm thành công");
