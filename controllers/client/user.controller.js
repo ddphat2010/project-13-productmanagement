@@ -191,3 +191,10 @@ module.exports.resetPassword = async (req, res) => {
       console.log(error);
     }
   };
+
+// [GET] /user/info
+module.exports.info = async (req, res) => {
+  res.render("client/pages/user/info.pug", {
+    pageTitle: "Thông tin tài khoản",
+  });
+};
