@@ -53,6 +53,14 @@ routesClient.routesClient(app);
 routesAdmin.routesAdmin(app);
 // end routesAdmin
 
+// 404 Not Found
+app.get("*", (req, res) => {
+    res.render("client/pages/errors/404", {
+      pageTitle: "404 Not Found",
+    });
+    // res.redirect("/");
+  });
+
 
 app.listen(port,() =>{
     console.log("App running on Port 3000");
