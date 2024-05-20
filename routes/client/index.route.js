@@ -12,6 +12,8 @@ const userMiddleware = require("../../middlewares/client/user.middleware");
 
 const cartMiddleware = require("../../middlewares/client/cart.middleware.js");
 
+const settingMiddleware = require("../../middlewares/client/setting.middleware.js")
+
 module.exports.routesClient = (app) => {
     app.use(categoryMiddleware.category);
 
@@ -19,6 +21,7 @@ module.exports.routesClient = (app) => {
 
     app.use(userMiddleware.infoUser);
 
+    app.use(settingMiddleware.settingsGeneral);
 
     app.use(
         "/",
@@ -51,5 +54,5 @@ module.exports.routesClient = (app) => {
     );
 
 
-
+    
 }

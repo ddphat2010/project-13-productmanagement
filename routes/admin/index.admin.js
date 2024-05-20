@@ -6,6 +6,7 @@ const routesAccounts = require("./account.route");
 const routesAuth = require("./auth.route");
 const authMiddleware = require("../../middlewares/admin/auth.middleware");
 const routesMyaccount = require("./my-account.route");
+const routesSetting = require("./setting.route");
 
 module.exports.routesAdmin = (app) => {
     app.use(
@@ -46,6 +47,10 @@ module.exports.routesAdmin = (app) => {
     
 
     app.use("/admin/auth", routesAuth);
+
+    app.use("/admin/settings", 
+        authMiddleware.requireAuth,    
+        routesSetting)
 
     
 }
