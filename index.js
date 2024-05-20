@@ -10,12 +10,25 @@ var cookieParser = require('cookie-parser');
 var session = require('express-session');
 const path = require("path");
 const moment = require("moment");
+const http = require('http');
+
+const { Server } = require("socket.io");
+
 
 
 dotenv.config()
 
 const app = express();
 const port = process.env.PORT;
+
+// socket.io
+const server = http.createServer(app);
+const io = new Server(server);
+
+io.on("connection", (socket) => {
+  console.log("Kết nối thành công !", socket.id);
+})
+// End socket.io
 
 // flash
 app.use(cookieParser('MINHNHAT'));
@@ -62,6 +75,6 @@ app.get("*", (req, res) => {
   });
 
 
-app.listen(port,() =>{
+server.listen(port,() =>{
     console.log("App running on Port 3000");
 })
