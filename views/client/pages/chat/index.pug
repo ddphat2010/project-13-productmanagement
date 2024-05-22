@@ -2,6 +2,8 @@ extends ../../layouts/default.pug
 
 block main
   .container.my-3
+    include ../../partials/list-btn-users.pug
+    
     .row
       .col-12
         h3 Chat
@@ -9,9 +11,6 @@ block main
     .row
       .col-12
         .chat(my-id=user.id)
-          //- .inner-head
-          //-   .inner-avatar EY
-          //-   .inner-name Em Yêu
           .inner-body
             each chat in chats
               div(
