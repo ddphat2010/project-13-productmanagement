@@ -90,6 +90,10 @@ module.exports.loginPost = async (req, res) => {
     },{
       statusOnline: "online"
     })
+
+    _io.once("connection", (socket) => {
+      socket.broadcast.emit("SERVER_RETURN_USER_ONLINE", user.id)
+    })
   
     res.redirect("/");
 };
@@ -98,10 +102,16 @@ module.exports.loginPost = async (req, res) => {
 module.exports.logout = async (req, res) => {
   res.clearCookie("tokenUser");
 
+  const userId = res.locals.user.id
+
   await User.updateOne({
     _id: res.locals.user.id
   },{
     statusOnline: "offline"
+  })
+
+  _io.once("connection", (socket) => {
+    socket.broadcast.emit("SERVER_RETURN_USER_OFFLINE", userId);
   })
 
   res.redirect("/");
