@@ -32,6 +32,16 @@ module.exports = (res) => {
         lengthAcceptFriends: lengthAcceptFriendsB
     })
 
+    // Lấy thông tin của A để trả về cho B
+    const infoUserA = await User.findOne({
+        _id: userIdA
+    }).select("id fullName avatar")
+
+    socket.broadcast.emit("SERVER_RETURN_INFO_ACCEPT_FRIEND", {
+        userIdB: userIdB,
+        infoUserA: infoUserA
+    })
+
       // Thêm id của B vào requestFriends của A
       const existUserBInA = await User.findOne({
         _id: userIdA,
@@ -47,7 +57,7 @@ module.exports = (res) => {
       }
     });
 
-    // Khi B từ chối kết bạn của A
+    // Khi A hủy gửi yêu cầu cho B
     socket.on("CLIENT_CANCEL_FRIEND", async (userIdB) => {
       const userIdA = res.locals.user.id;
 
@@ -79,7 +89,7 @@ module.exports = (res) => {
 
     });
 
-    // Khi A hủy gửi yêu cầu cho B
+    // Khi B từ chối kết bạn của A
     socket.on("CLIENT_REFUSE_FRIEND", async (userIdA) => {
         const userIdB = res.locals.user.id;
     
