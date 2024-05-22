@@ -8,7 +8,7 @@ module.exports.index = async (req, res) => {
         deleted: false,
         status: "active"
     }).sort({
-        position: "desc"
+        position: "asc"
     });
 
     for (const item of products) {
