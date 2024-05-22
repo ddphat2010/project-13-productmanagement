@@ -75,13 +75,13 @@ module.exports.edit = async (req, res) => {
       roles: roles,
     });
   } catch (error) {
-    res.redirect(`/admin/accounts`);
+    res.redirect(`/admin/accounts`)
   }
 };
 
 // [PATCH] /admin/accounts/edit/:id
 module.exports.editPatch = async (req, res) => {
-    const id = req.params.id;
+    const id = req.params.id
 
     if(req.body.password) {
         req.body.password = md5(req.body.password); 

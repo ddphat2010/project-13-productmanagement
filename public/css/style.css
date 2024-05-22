@@ -2,7 +2,7 @@
 .header {
     border-bottom: 1px solid #ddd;
     padding: 10px 0;
-    background-color: black;
+    background-color: rgba(0, 0, 0, 0.902);
   }
   
   .header .inner-logo img {
