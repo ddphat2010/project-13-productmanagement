@@ -140,6 +140,13 @@ socket.on("SERVER_RETURN_INFO_ACCEPT_FRIEND", (data) => {
           });
         // Hết Chấp nhận lời mời kết bạn
     }
+
+      // Khi A gửi kết bạn cho B, danh sách người dùng của B xóa đi A
+      const dataUsersNotFriend = document.querySelector(`[data-users-not-friend="${data.userIdB}"]`);
+      if(dataUsersNotFriend) {
+        const boxUserDelete = dataUsersNotFriend.querySelector(`[user-id="${data.infoUserA._id}"]`)
+        dataUsersNotFriend.removeChild(boxUserDelete);
+      }
     
 })
 // End SERVER_RETURN_INFO_ACCEPT_FRIEND
