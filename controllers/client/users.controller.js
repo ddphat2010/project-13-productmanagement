@@ -5,15 +5,15 @@ const usersSocket = require("../../sockets/client/users.socket");
 // [GET] /users/not-friend
 module.exports.notFriend = async (req, res) => {
     // SocketIO
-  usersSocket(res);
+    usersSocket(res);
     // End SocketIO
 
-  const userId = res.locals.user.id;
+    const userId = res.locals.user.id;
 
-  const requestFriends = res.locals.user.requestFriends;
-  const acceptFriends = res.locals.user.acceptFriends;
+    const requestFriends = res.locals.user.requestFriends;
+    const acceptFriends = res.locals.user.acceptFriends;
 
-  const users = await User.find({
+    const users = await User.find({
     $and: [
         { _id: { $ne: userId } },
         { _id: { $nin: requestFriends } },
@@ -21,12 +21,34 @@ module.exports.notFriend = async (req, res) => {
     ],
     status: "active",
     deleted: false
-  }).select("id fullName avatar");
+    }).select("id fullName avatar");
 
-  console.log(users);
+    console.log(users);
 
-  res.render("client/pages/users/not-friend", {
-    pageTitle: "Danh sách người dùng",
-    users: users
-  });
+    res.render("client/pages/users/not-friend", {
+        pageTitle: "Danh sách người dùng",
+        users: users
+    });
 };
+
+
+module.exports.request = async (req, res) => {
+    // SocketIO
+    usersSocket(res);
+    // End SocketIO
+  
+    const requestFriends = res.locals.user.requestFriends;
+  
+    const users = await User.find({
+        _id: { $in: requestFriends },
+        status: "active",
+        deleted: false
+    }).select("id fullName avatar");
+  
+    console.log(users);
+  
+    res.render("client/pages/users/request", {
+        pageTitle: "Lời mời đã gửi",
+        users: users
+    });
+  };

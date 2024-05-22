@@ -37,5 +37,27 @@ module.exports = (res) => {
         });
       }
     });
+
+    // Khi A hủy gửi yêu cầu cho B
+    socket.on("CLIENT_CANCEL_FRIEND", async (userIdB) => {
+      const userIdA = res.locals.user.id;
+
+      console.log("userIdA", userIdA);
+      console.log("userIdB", userIdB);
+
+      // Xóa id của A trong acceptFriends của B
+      await User.updateOne({
+        _id: userIdB
+      }, {
+        $pull: { acceptFriends: userIdA }
+      });
+
+      // Xóa id của B trong requestFriends của A
+      await User.updateOne({
+        _id: userIdA
+      }, {
+        $pull: { requestFriends: userIdB }
+      });
+    });
   });
 }

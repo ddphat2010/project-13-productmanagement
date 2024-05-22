@@ -1,0 +1,40 @@
+extends ../../layouts/default.pug
+
+block main
+  .container.my-3
+
+    include ../../partials/list-btn-users.pug
+
+    .row
+      .col-12
+        h2 Lời mời kết bạn
+
+    .row
+      each user in users
+        .col-6
+          div(class="box-user")
+            div(class="inner-avatar")
+              img(
+                src="https://robohash.org/hicveldicta.png"
+                alt=user.fullName
+              )
+            div(class="inner-info")
+              div(class="inner-name") #{user.fullName}
+              div(class="inner-buttons")
+                button(
+                  class="btn btn-sm btn-primary mr-1"
+                  btn-accept-friend=user.id
+                ) Chấp nhận
+                button(
+                  class="btn btn-sm btn-secondary mr-1"
+                  btn-refuse-friend=user.id
+                ) Xóa
+                button(
+                  class="btn btn-sm btn-secondary mr-1"
+                  btn-deleted-friend
+                  disabled
+                ) Đã xóa
+
+
+block script
+  script( src="/js/users.js")
