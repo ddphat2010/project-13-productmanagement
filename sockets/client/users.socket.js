@@ -61,19 +61,19 @@ module.exports = (res) => {
     socket.on("CLIENT_CANCEL_FRIEND", async (userIdB) => {
       const userIdA = res.locals.user.id;
 
-      // Xóa id của A trong acceptFriends của B
-      await User.updateOne({
+        // Xóa id của A trong acceptFriends của B
+        await User.updateOne({
         _id: userIdB
-      }, {
+        }, {
         $pull: { acceptFriends: userIdA }
-      });
+        });
 
-      // Xóa id của B trong requestFriends của A
-      await User.updateOne({
+        // Xóa id của B trong requestFriends của A
+        await User.updateOne({
         _id: userIdA    
-      }, {
+        }, {
         $pull: { requestFriends: userIdB }
-      });
+        });
 
         // Lấy độ dài acceptFriends của B để trả về cho B
         const infoUserB = await User.findOne({
@@ -85,6 +85,13 @@ module.exports = (res) => {
         socket.broadcast.emit("SERVER_RETURN_LENGTH_ACCEPT_FRIEND", {
             userId: userIdB,
             lengthAcceptFriends: lengthAcceptFriendsB
+        })
+
+        // Lấy userId của A trả về cho B
+        socket.broadcast.emit("SERVER_RETURN_ID_CANCEL_FRIEND", {
+            userIdB: userIdB,
+            userIdA: userIdA
+            
         })
 
     });
@@ -147,9 +154,6 @@ module.exports = (res) => {
           });
 
     });
-
-
-
   });
 }
 
