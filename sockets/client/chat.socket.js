@@ -1,10 +1,10 @@
 const Chat = require("../../models/chat.model");
 const uploadToCloudinary = require("../../helpers/uploadToCloudinary.helper");
 
-module.exports = (req, res) => {
+module.exports = (res) => {
     const userId = res.locals.user.id;
     const fullName = res.locals.user.fullName;
-    const roomChatId = req.params.roomChatId;
+    // const roomChatId = req.params.roomChatId;
 
     _io.once("connection", (socket) => {
         socket.join("roomChatId");
@@ -21,7 +21,7 @@ module.exports = (req, res) => {
           // Lưu data và database
           const chat = new Chat({
             user_id: userId,
-            room_chat_id: roomChatId,
+            // room_chat_id: roomChatId,
             content: data.content,
             images: images
           });
@@ -29,7 +29,7 @@ module.exports = (req, res) => {
           await chat.save();
     
           // Trả data ra giao diện realtime
-          _io.to(roomChatId).emit("SERVER_SEND_MESSAGE", {
+          _io.emit("SERVER_SEND_MESSAGE", {
             userId: userId,
             fullName: fullName,
             content: data.content,

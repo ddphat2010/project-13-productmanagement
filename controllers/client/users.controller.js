@@ -12,22 +12,18 @@ module.exports.notFriend = async (req, res) => {
 
     const requestFriends = res.locals.user.requestFriends;
     const acceptFriends = res.locals.user.acceptFriends;
-    const friendsListID = res.locals.user.friendsList.map(item => item.user_id);
-
-    console.log(friendsListID);
+    const friendsListId = res.locals.user.friendsList.map(item => item.user_id);
 
     const users = await User.find({
     $and: [
         { _id: { $ne: userId } },
         { _id: { $nin: requestFriends } },
         { _id: { $nin: acceptFriends } },
-        { _id: { $nin: friendsListID } }
+        { _id: { $nin: friendsListId } }
     ],
     status: "active",
     deleted: false
     }).select("id fullName avatar");
-
-    console.log(users);
 
     res.render("client/pages/users/not-friend", {
         pageTitle: "Danh sách người dùng",
@@ -70,9 +66,7 @@ module.exports.accept = async (req, res) => {
         status: "active",
         deleted: false
     }).select("id fullName avatar");
-  
-    console.log(users);
-  
+    
     res.render("client/pages/users/accept", {
         pageTitle: "Lời mời đã nhận",
         users: users
@@ -90,10 +84,10 @@ module.exports.friends = async (req, res) => {
         deleted: false
     }).select("id fullName avatar statusOnline")
 
-    for (const user of users) {
-        const infoUser = friendsList.find(item => item.user_id == user.id);
-        user.roomChatId = infoUser.room_chat_id;
-    }
+    // for (const user of users) {
+    //     const infoUser = friendsList.find(item => item.user_id == user.id);
+    //     user.roomChatId = infoUser.room_chat_id;
+    // }
 
     res.render("client/pages/users/friends", {
         pageTitle: "Danh sách bạn bè",

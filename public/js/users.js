@@ -60,7 +60,7 @@ if(listBtnAcceptFriends.length > 0) {
 
 // SERVER_RETURN_LENGTH_ACCEPT_FRIEND
 socket.on("SERVER_RETURN_LENGTH_ACCEPT_FRIEND", (data) => {
-    const badgeUsersAccept = document.querySelector(`[badge-users-accept='${data.userId}']`);
+    const badgeUsersAccept = document.querySelector(`[badge-users-accept="${data.userId}"]`);
     if(badgeUsersAccept) {
         badgeUsersAccept.innerHTML = data.lengthAcceptFriends;
     }

@@ -13,6 +13,8 @@ module.exports = (res) => {
         acceptFriends: userIdA
       });
 
+
+
       if(!existUserAInB) {
         await User.updateOne({
           _id: userIdB
@@ -20,28 +22,6 @@ module.exports = (res) => {
           $push: { acceptFriends: userIdA }
         });
       }
-
-    //  Lấy độ dài acceptFriends của B trả về cho B
-    const infoUserB = await User.findOne({
-        _id: userIdB
-    }).select("acceptFriends");
-
-    const lengthAcceptFriendsB = infoUserB.acceptFriends.length;
-
-    socket.broadcast.emit("SERVER_RETURN_LENGTH_ACCEPT_FRIEND", {
-        userId: userIdB,
-        lengthAcceptFriends: lengthAcceptFriendsB
-    })
-
-    // Lấy thông tin của A để trả về cho B
-    const infoUserA = await User.findOne({
-        _id: userIdA
-    }).select("id fullName avatar")
-
-    socket.broadcast.emit("SERVER_RETURN_INFO_ACCEPT_FRIEND", {
-        userIdB: userIdB,
-        infoUserA: infoUserA
-    })
 
       // Thêm id của B vào requestFriends của A
       const existUserBInA = await User.findOne({
@@ -56,45 +36,68 @@ module.exports = (res) => {
           $push: { requestFriends: userIdB }
         });
       }
+
+      // Lấy độ dài acceptFriends của B trả về cho B
+      const infoUserB = await User.findOne({
+          _id: userIdB
+      }).select("acceptFriends");
+
+      const lengthAcceptFriendsB = infoUserB.acceptFriends.length;
+
+      socket.broadcast.emit("SERVER_RETURN_LENGTH_ACCEPT_FRIEND", {
+          userId: userIdB,
+          lengthAcceptFriends: lengthAcceptFriendsB
+      })
+
+      // Lấy thông tin của A để trả về cho B
+      const infoUserA = await User.findOne({
+          _id: userIdA
+      }).select("id fullName avatar")
+
+      socket.broadcast.emit("SERVER_RETURN_INFO_ACCEPT_FRIEND", {
+          userIdB: userIdB,
+          infoUserA: infoUserA
+      })
     });
 
     // Khi A hủy gửi yêu cầu cho B
     socket.on("CLIENT_CANCEL_FRIEND", async (userIdB) => {
       const userIdA = res.locals.user.id;
 
-        // Xóa id của A trong acceptFriends của B
-        await User.updateOne({
-        _id: userIdB
-        }, {
-        $pull: { acceptFriends: userIdA }
-        });
+      console.log("userIdA", userIdA);
+      console.log("userIdB", userIdB);
 
-        // Xóa id của B trong requestFriends của A
-        await User.updateOne({
-        _id: userIdA    
-        }, {
-        $pull: { requestFriends: userIdB }
-        });
+      // Xóa id của A trong acceptFriends của B
+      await User.updateOne({
+      _id: userIdB
+      }, {
+      $pull: { acceptFriends: userIdA }
+      });
 
-        // Lấy độ dài acceptFriends của B để trả về cho B
-        const infoUserB = await User.findOne({
-        _id: userIdB
-        }).select("acceptFriends");
+      // Xóa id của B trong requestFriends của A
+      await User.updateOne({
+      _id: userIdA    
+      }, {
+      $pull: { requestFriends: userIdB }
+      });
 
-        const lengthAcceptFriendsB = infoUserB.acceptFriends.length;
+      // Lấy độ dài acceptFriends của B để trả về cho B
+      const infoUserB = await User.findOne({
+      _id: userIdB
+      }).select("acceptFriends");
 
-        socket.broadcast.emit("SERVER_RETURN_LENGTH_ACCEPT_FRIEND", {
-            userId: userIdB,
-            lengthAcceptFriends: lengthAcceptFriendsB
-        })
+      const lengthAcceptFriendsB = infoUserB.acceptFriends.length;
 
-        // Lấy userId của A trả về cho B
-        socket.broadcast.emit("SERVER_RETURN_ID_CANCEL_FRIEND", {
-            userIdB: userIdB,
-            userIdA: userIdA
-            
-        })
+      socket.broadcast.emit("SERVER_RETURN_LENGTH_ACCEPT_FRIEND", {
+          userId: userIdB,
+          lengthAcceptFriends: lengthAcceptFriendsB
+      })
 
+      // Lấy userId của A trả về cho B
+      socket.broadcast.emit("SERVER_RETURN_ID_CANCEL_FRIEND", {
+          userIdB: userIdB,
+          userIdA: userIdA   
+      })
     });
 
     // Khi B từ chối kết bạn của A
@@ -122,25 +125,22 @@ module.exports = (res) => {
     // Khi B chấp nhận kết bạn của A
     socket.on("CLIENT_ACCEPT_FRIEND", async (userIdA) => {
         const userIdB = res.locals.user.id;
-    
-        console.log("userIdA", userIdA);
-        console.log("userIdB", userIdB);
 
         // Tạo phòng chat mới
-        const roomChat = new RoomChat({
-          typeRoom: "friend",
-          users: [
-            {
-              user_id: userIdA,
-              role: "superAdmin"
-            },{
-              user_id: userIdB,
-              role: "superAdmin"
-            }
-          ]
-        })
+        // const roomChat = new RoomChat({
+        //   typeRoom: "friend",
+        //   users: [
+        //     {
+        //       user_id: userIdA,
+        //       role: "superAdmin"
+        //     },{
+        //       user_id: userIdB,
+        //       role: "superAdmin"
+        //     }
+        //   ]
+        // })
 
-        await roomChat.save();
+        // await roomChat.save();
 
         // Hết Tạo phòng chat mới
     
@@ -152,7 +152,7 @@ module.exports = (res) => {
             $push: { 
                 friendsList: {
                     user_id: userIdA, 
-                    room_chat_id: roomChat.id
+                    room_chat_id:""
                 } 
             },
             $pull: { acceptFriends: userIdA }
@@ -166,7 +166,7 @@ module.exports = (res) => {
             $push: { 
                 friendsList: {
                     user_id: userIdB, 
-                    room_chat_id: roomChat.id
+                    room_chat_id: ""
                 } 
             },
             $pull: { requestFriends: userIdB }
@@ -175,4 +175,3 @@ module.exports = (res) => {
     });
   });
 }
-

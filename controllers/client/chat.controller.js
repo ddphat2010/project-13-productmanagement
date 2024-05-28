@@ -7,16 +7,15 @@ const chatSocket = require("../../sockets/client/chat.socket");
 module.exports.index = async (req, res) => {
 
     // SocketIO
-    chatSocket(req, res);
+    chatSocket(res);
 
       // End SocketIO
 
-      const roomChatId = req.params.roomChatId;
+      // const roomChatId = req.params.roomChatId;
       
     
       // Lấy data từ database
       const chats = await Chat.find({
-        room_chat_id: roomChatId,
         deleted: false
       });
     
