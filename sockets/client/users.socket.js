@@ -127,20 +127,21 @@ module.exports = (res) => {
         const userIdB = res.locals.user.id;
 
         // Tạo phòng chat mới
-        // const roomChat = new RoomChat({
-        //   typeRoom: "friend",
-        //   users: [
-        //     {
-        //       user_id: userIdA,
-        //       role: "superAdmin"
-        //     },{
-        //       user_id: userIdB,
-        //       role: "superAdmin"
-        //     }
-        //   ]
-        // })
+        const roomChat = new RoomChat({
+          typeRoom: "friend",
+          users: [
+            {
+              user_id: userIdA,
+              role: "superAdmin"
+            },
+            {
+              user_id: userIdB,
+              role: "superAdmin"
+            }
+          ]
+        })
 
-        // await roomChat.save();
+        await roomChat.save();
 
         // Hết Tạo phòng chat mới
     
@@ -152,7 +153,7 @@ module.exports = (res) => {
             $push: { 
                 friendsList: {
                     user_id: userIdA, 
-                    room_chat_id:""
+                    room_chat_id: roomChat.id
                 } 
             },
             $pull: { acceptFriends: userIdA }
@@ -166,7 +167,7 @@ module.exports = (res) => {
             $push: { 
                 friendsList: {
                     user_id: userIdB, 
-                    room_chat_id: ""
+                    room_chat_id: roomChat.id
                 } 
             },
             $pull: { requestFriends: userIdB }
