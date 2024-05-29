@@ -11,4 +11,16 @@ router.get(
     controller.index
 );
 
+router.get(
+    "/create", 
+    // chatMiddleware.isAccess, 
+    controller.create
+);
+
+router.post(
+    "/create", 
+    // chatMiddleware.isAccess, 
+    controller.createPost
+);
+
 module.exports = router;
