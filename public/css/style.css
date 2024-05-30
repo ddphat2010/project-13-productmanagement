@@ -590,3 +590,16 @@
   margin-bottom: 3px;
 }
 /* end box-room */
+
+/* edit css login */
+.background-login {
+  background: rgb(2,0,36);
+  background: linear-gradient(90deg, rgba(2,0,36,1) 0%, rgb(15, 26, 131) 16%, rgba(0,212,255,1) 100%);
+  padding: 10px 0;
+  border-radius: 15px;
+}
+
+.form-group2 {
+  color: #f2f2f2;
+}
+/* End edit css login */
