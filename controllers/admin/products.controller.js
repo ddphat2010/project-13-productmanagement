@@ -256,10 +256,13 @@ module.exports.editPatch = async (req, res) => {
         req.body.discountPercentage = parseInt(req.body.discountPercentage);
         req.body.position = parseInt(req.body.position);
 
-        console.log(req.file);
         if(req.file && req.file.filename) {
             req.body.thumbnail = `/uploads/${req.file.filename}`
         }
+
+        console.log(req.file);
+
+        // console.log(req.file.filename);
 
         const objectUpdatedBy = {
             accountId: res.locals.user.id,
